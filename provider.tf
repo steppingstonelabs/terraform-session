@@ -16,6 +16,7 @@ variable "secret" {}
 variable "django_secret" {}
 variable "db_pwd" {}
 variable "pvt_key" {}
+variable "install_script" {}
 
 provider "digitalocean" {
   token = var.do_token

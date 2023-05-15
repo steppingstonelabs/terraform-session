@@ -16,7 +16,7 @@ resource "digitalocean_droplet" "www-1" {
   }
 
   provisioner "file" {
-    source      = "install.sh"
+    source      = "${var.install_script}"
     destination = "/tmp/install.sh"
   }
 
