@@ -16,6 +16,8 @@ variable "secret" {}
 variable "django_secret" {}
 variable "db_pwd" {}
 variable "pvt_key" {}
+variable "su" {}
+variable "su_pwd" {}
 variable "install_script" {}
 
 provider "digitalocean" {
