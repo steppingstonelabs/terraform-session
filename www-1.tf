@@ -26,7 +26,7 @@ resource "digitalocean_droplet" "www-1" {
       "sudo apt update -y",
       "sudo apt install -y nginx git curl python3-pip postgresql postgresql-contrib",
       "chmod +x /tmp/install.sh",
-      "/tmp/install.sh -c=${var.client} -s=${var.secret} -p=${var.db_pwd} -d='${var.django_secret}' -h=\"127.0.0.1,localhost,${digitalocean_droplet.www-1.ipv4_address}\" -k=${var.slack_token} -w=${var.su_pwd} -u=${var.su}"
+      "/tmp/install.sh -c=${var.client} -s=${var.secret} -p=${var.db_pwd} -d='${var.django_secret}' -h=\"${var.allowed_hosts},${digitalocean_droplet.www-1.ipv4_address}\" -k=${var.slack_token} -w=${var.su_pwd} -u=${var.su}"
     ]
   }
 }

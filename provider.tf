@@ -19,6 +19,7 @@ variable "pvt_key" {}
 variable "su" {}
 variable "su_pwd" {}
 variable "install_script" {}
+variable "allowed_hosts" {}
 
 provider "digitalocean" {
   token = var.do_token

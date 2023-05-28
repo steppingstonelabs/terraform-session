@@ -7,5 +7,6 @@ terraform plan \
   -var "django_secret=${LEARN_OPS_DJANGO_SECRET_KEY}" \
   -var "db_pwd=${LEARN_OPS_PASSWORD}" \
   -var "su=${LEARN_OPS_SUPERUSER_NAME}" \
+  -var "allowed_hosts=${LEARN_OPS_ALLOWED_HOSTS}" \
   -var "su_pwd=${LEARN_OPS_SUPERUSER_PASSWORD}" \
   -var "install_script=/Users/chortlehoort/dev/github/nss/python/LearningPlatform/setup_ubuntu.sh"
