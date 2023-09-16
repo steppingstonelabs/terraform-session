@@ -13,4 +13,4 @@ terraform apply \
   -var "allowed_hosts=${LEARN_OPS_ALLOWED_HOSTS}" \
   -var "su=${LEARN_OPS_SUPERUSER_NAME}" \
   -var "su_pwd=${LEARN_OPS_SUPERUSER_PASSWORD}" \
-  -var "install_script=/Users/chortlehoort/dev/github/nss/python/LearningPlatform/setup_ubuntu.sh"
+  -var "install_script=/Users/chortlehoort/dev/github/stevebrownlee/learning-platform/api/setup_ubuntu.sh"
