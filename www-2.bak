@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "www-1" {
+resource "digitalocean_droplet" "www-2" {
   image = "ubuntu-20-04-x64"
-  name = "www-1"
+  name = "www-2"
   region = "nyc3"
   size = "s-1vcpu-2gb" //https://slugs.do-api.dev/
   ssh_keys = [
@@ -30,10 +30,7 @@ resource "digitalocean_droplet" "www-1" {
       "sudo apt update -y",
       "sudo apt install -y nginx git curl python3-pip postgresql postgresql-contrib",
       "chmod +x /tmp/install.sh",
-      "/tmp/install.sh --hosts=\"${var.allowed_hosts},${digitalocean_droplet.www-1.ipv4_address}\" --slack=${var.slack_token} --client=${var.client} --secret=${var.secret} --django='${var.django_secret}' --dbhost=${var.db_host} --dbusername=${var.db_user} --dbname=${var.db_name} --dbpassword=${var.db_pwd} --suser=${var.su} --supass=${var.su_pwd} "
+      "/tmp/install.sh -c=${var.client} -s=${var.secret} -p=${var.db_pwd} -d='${var.django_secret}' -h=\"${var.allowed_hosts},${digitalocean_droplet.www-1.ipv4_address}\" -k=${var.slack_token} -w=${var.su_pwd} -u=${var.su}"
     ]
   }
 }
-
-
-# export LEARN_OPS_HOST=$(terraform output -raw db_cluster_hostname)

@@ -9,6 +9,8 @@ terraform apply \
   -var "client=${LEARN_OPS_CLIENT_ID}" \
   -var "secret=${LEARN_OPS_SECRET_KEY}" \
   -var "django_secret=${LEARN_OPS_DJANGO_SECRET_KEY}" \
+  -var "db_user=${LEARN_OPS_USER}" \
+  -var "db_name=${LEARN_OPS_DB}" \
   -var "db_pwd=${LEARN_OPS_PASSWORD}" \
   -var "allowed_hosts=${LEARN_OPS_ALLOWED_HOSTS}" \
   -var "su=${LEARN_OPS_SUPERUSER_NAME}" \

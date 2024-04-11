@@ -10,16 +10,20 @@ terraform {
 
 # These capture and store the `-var` paramater values when you run `plan`
 variable "do_token" {}
+variable "pvt_key" {}
+
+variable "allowed_hosts" {}
 variable "slack_token" {}
 variable "client" {}
 variable "secret" {}
 variable "django_secret" {}
+variable "db_host" {}
+variable "db_user" {}
+variable "db_name" {}
 variable "db_pwd" {}
-variable "pvt_key" {}
 variable "su" {}
 variable "su_pwd" {}
 variable "install_script" {}
-variable "allowed_hosts" {}
 
 provider "digitalocean" {
   token = var.do_token
