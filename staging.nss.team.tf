@@ -7,9 +7,9 @@ resource "digitalocean_record" "www" {
   value  = digitalocean_droplet.www-1.ipv4_address
 }
 
-resource "digitalocean_record" "db_a" {
+resource "digitalocean_record" "db_cname" {
   domain = "nss.team"
-  type   = "A"
+  type   = "CNAME"
   name   = "knowledgebase"
-  value  = digitalocean_database_cluster.postgres_db.host
+  value  = "${digitalocean_database_cluster.postgres_db.host}."
 }

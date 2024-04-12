@@ -19,6 +19,7 @@ resource "digitalocean_database_user" "database_user" {
 
 output "db_user_password" {
   value = digitalocean_database_user.database_user.password
+  sensitive = true
   description = "The password for the database user."
 }
 

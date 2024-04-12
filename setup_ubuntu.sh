@@ -22,8 +22,6 @@ done
 set +o histexpand
 set -eu
 
-source .env
-
 #####
 # Create the Ubuntu user account
 #####
@@ -39,15 +37,36 @@ else
     sudo chsh -s /bin/bash $DBUSERNAME
 fi
 
+wait_for_apt_lock() {
+    local timeout=300  # Set timeout to 300 seconds (5 minutes)
+    while sudo fuser /var/lib/dpkg/lock >/dev/null 2>&1 ||
+          sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ||
+          sudo fuser /var/cache/apt/archives/lock >/dev/null 2>&1; do
+        echo "Waiting for other software managers to finish..."
+        sleep 1
+        ((timeout--))
+        if [ "$timeout" -le 0 ]; then
+            echo "Timed out waiting for APT locks to be released."
+            exit 1
+        fi
+    done
+}
+
 #####
 # Install required software
 #####
+sudo wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+wait_for_apt_lock
 sudo apt-get update -y
+
 packages=("gcc" "git" "curl" "nginx" "certbot" "python3-django" "postgresql-12" "postgresql-contrib-12" "python3-pip" "python3.8-venv")
 
 for package in "${packages[@]}"; do
   if ! dpkg-query -W -f='${Status}\n' "$package" | grep -q "ok installed"; then
     echo "Package $package is not installed. Installing..."
+    wait_for_apt_lock
     sudo apt-get install -y "$package"
   else
     echo "Package $package is already installed. Skipping..."
